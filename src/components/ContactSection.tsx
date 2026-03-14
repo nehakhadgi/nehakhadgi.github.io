@@ -59,11 +59,12 @@ const ContactSection = () => {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="font-mono-label text-muted-foreground block mb-1.5">Full Name</label>
               <input
                 type="text"
+                name="from_name"
                 required
                 className="w-full px-4 py-3 rounded-lg bg-card border border-border text-foreground font-body focus:outline-none focus:border-accent transition-colors"
                 placeholder="Your name"
@@ -73,6 +74,7 @@ const ContactSection = () => {
               <label className="font-mono-label text-muted-foreground block mb-1.5">Email</label>
               <input
                 type="email"
+                name="from_email"
                 required
                 className="w-full px-4 py-3 rounded-lg bg-card border border-border text-foreground font-body focus:outline-none focus:border-accent transition-colors"
                 placeholder="you@example.com"
@@ -81,6 +83,7 @@ const ContactSection = () => {
             <div>
               <label className="font-mono-label text-muted-foreground block mb-1.5">Message</label>
               <textarea
+                name="message"
                 required
                 rows={4}
                 className="w-full px-4 py-3 rounded-lg bg-card border border-border text-foreground font-body focus:outline-none focus:border-accent transition-colors resize-none"
@@ -89,12 +92,18 @@ const ContactSection = () => {
             </div>
             <button
               type="submit"
+              disabled={sending}
               className="btn-primary w-full justify-center"
             >
               {submitted ? (
                 <>
                   <Check size={16} />
                   Message Sent!
+                </>
+              ) : sending ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" />
+                  Sending...
                 </>
               ) : (
                 <>
