@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Award, BookOpen } from "lucide-react";
 
 const education = [
   {
@@ -8,18 +8,27 @@ const education = [
     institution: "Khwopa College of Engineering (TU – IOE)",
     detail: "Final Year · 8th Semester",
     year: "2021 – Present",
+    icon: GraduationCap,
+    gradient: "var(--gradient-accent)",
+    active: true,
   },
   {
     degree: "Higher Secondary Education (+2)",
     institution: "Sagarmatha Multiple College",
     detail: "CGPA: 3.53",
     year: "2019 – 2021",
+    icon: Award,
+    gradient: "var(--gradient-sage)",
+    active: false,
   },
   {
     degree: "Secondary Education (SEE)",
     institution: "Manjari Secondary School",
     detail: "GPA: 3.80",
-    year: "2019",
+    year: "2018",
+    icon: BookOpen,
+    gradient: "var(--gradient-warm)",
+    active: false,
   },
 ];
 
@@ -28,38 +37,60 @@ const EducationSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="education" className="section-container" ref={ref}>
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <p className="section-label">Education</p>
-        <h2 className="section-title">Academic Foundation</h2>
+    <section id="education" ref={ref}>
+      <div className="divider-gradient" />
+      <div className="section-container">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <p className="section-label">Education</p>
+          <h2 className="section-title">Academic Foundation</h2>
 
-        <div className="mt-8 space-y-0 relative">
-          {/* Timeline line */}
-          <div className="absolute left-[15px] top-2 bottom-2 w-[1px] bg-border" />
-
-          {education.map((edu, i) => (
-            <motion.div
-              key={edu.degree}
-              initial={{ opacity: 0, x: -20 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 * i, ease: [0.16, 1, 0.3, 1] }}
-              className="relative pl-12 pb-10 last:pb-0"
-            >
-              <div className="absolute left-[8px] top-1 w-[15px] h-[15px] rounded-full bg-background border-2 border-accent flex items-center justify-center">
-                <div className="w-[5px] h-[5px] rounded-full bg-accent" />
-              </div>
-              <span className="font-mono-label text-muted-foreground">{edu.year}</span>
-              <h3 className="font-display text-xl font-bold mt-1 text-foreground">{edu.degree}</h3>
-              <p className="text-muted-foreground font-body mt-1">{edu.institution}</p>
-              <p className="text-muted-foreground font-body text-sm mt-0.5">{edu.detail}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
+          <div className="mt-12 grid gap-6">
+            {education.map((edu, i) => (
+              <motion.div
+                key={edu.degree}
+                initial={{ opacity: 0, x: -30 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.15 * i, ease: [0.16, 1, 0.3, 1] }}
+                className={`card-glass rounded-2xl p-6 md:p-8 flex items-start gap-5 group ${
+                  edu.active ? "ring-1 ring-accent/30" : ""
+                }`}
+              >
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ background: edu.gradient }}
+                >
+                  <edu.icon size={20} className="text-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <h3 className="font-display text-lg md:text-xl font-bold text-foreground">
+                      {edu.degree}
+                    </h3>
+                    <span className="font-mono-label text-muted-foreground whitespace-nowrap">
+                      {edu.year}
+                    </span>
+                  </div>
+                  <p className="text-muted-foreground font-body mt-1">{edu.institution}</p>
+                  <div className="mt-3 inline-flex items-center gap-2">
+                    <span className="text-sm font-mono-label px-3 py-1 rounded-full bg-secondary text-muted-foreground">
+                      {edu.detail}
+                    </span>
+                    {edu.active && (
+                      <span className="text-sm font-mono-label px-3 py-1 rounded-full bg-accent/10 text-accent">
+                        Current
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };
