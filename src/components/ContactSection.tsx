@@ -1,16 +1,32 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Mail, MapPin, Send, Check } from "lucide-react";
+import { Mail, MapPin, Send, Check, Loader2 } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 const ContactSection = () => {
   const ref = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    if (!formRef.current || sending) return;
+    setSending(true);
+
+    emailjs
+      .sendForm("service_6g3b5ii", "template_j2tnpzn", formRef.current, "0tPlUSrcOrO1DNC6k")
+      .then(() => {
+        setSubmitted(true);
+        formRef.current?.reset();
+        setTimeout(() => setSubmitted(false), 3000);
+      })
+      .catch((err) => {
+        console.error("EmailJS error:", err);
+        alert("Failed to send message. Please try again.");
+      })
+      .finally(() => setSending(false));
   };
 
   return (
