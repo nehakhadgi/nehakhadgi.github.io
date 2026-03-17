@@ -9,14 +9,14 @@ const HeroSection = () => {
         animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-20 right-[10%] w-[400px] h-[400px] rounded-full opacity-20 blur-[100px]"
-        style={{ background: "var(--gradient-accent)" }}
-      />
+        style={{ background: "var(--gradient-accent)" }} />
+      
       <motion.div
         animate={{ x: [0, -20, 0], y: [0, 30, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-20 left-[5%] w-[300px] h-[300px] rounded-full opacity-15 blur-[80px]"
-        style={{ background: "var(--gradient-sage)" }}
-      />
+        style={{ background: "var(--gradient-sage)" }} />
+      
 
       {/* Grid overlay */}
       <div className="absolute inset-0 pointer-events-none" style={{
@@ -30,16 +30,16 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-3xl"
-        >
+          className="max-w-3xl">
+          
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/50 backdrop-blur-sm mb-8"
-          >
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/50 backdrop-blur-sm mb-8">
+            
             <Sparkles size={14} className="text-accent" />
-            <span className="font-mono-label text-muted-foreground">Computer Engineering · AI & ML</span>
+            <span className="font-mono-label text-muted-foreground">Computer Engineer    </span>
           </motion.div>
 
           <h1 className="text-display text-foreground mb-8">
@@ -67,23 +67,23 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex gap-10 mt-16 pt-8 border-t border-border"
-          >
+            className="flex gap-10 mt-16 pt-8 border-t border-border">
+            
             {[
-              { value: "4+", label: "Projects" },
-              { value: "YOLO", label: "Specialization" },
-              { value: "8th", label: "Semester" },
-            ].map((stat) => (
-              <div key={stat.label}>
+            { value: "4+", label: "Projects" },
+            { value: "YOLO", label: "Specialization" },
+            { value: "8th", label: "Semester" }].
+            map((stat) =>
+            <div key={stat.label}>
                 <p className="font-display text-2xl font-bold text-foreground">{stat.value}</p>
                 <p className="font-mono-label text-muted-foreground mt-1">{stat.label}</p>
               </div>
-            ))}
+            )}
           </motion.div>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default HeroSection;
