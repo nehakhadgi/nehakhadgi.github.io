@@ -25,10 +25,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
-      - run: npm ci
-      - run: npm run build
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build
+        run: npm run build
 
       - name: Copy CNAME to dist
         run: cp CNAME dist/CNAME 2>/dev/null || true
