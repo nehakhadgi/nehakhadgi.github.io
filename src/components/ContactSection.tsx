@@ -49,11 +49,11 @@ const ContactSection = () => {
                 Feel free to reach out.
               </p>
               <div className="space-y-5">
-                <a href="mailto:nehakhadgi@gmail.com" className="flex items-center gap-4 group">
+                <a href="mailto:nehakhadgi55@gmail.com" className="flex items-center gap-4 group">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "var(--gradient-accent)" }}>
                     <Mail size={16} className="text-white" />
                   </div>
-                  <span className="font-body text-foreground group-hover:text-accent transition-colors">nehakhadgi@gmail.com</span>
+                  <span className="font-body text-foreground group-hover:text-accent transition-colors">nehakhadgi55@gmail.com</span>
                 </a>
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "var(--gradient-sage)" }}>
