@@ -5,27 +5,7 @@ import AboutSection from "@/components/AboutSection";
 import EducationSection from "@/components/EducationSection";
 import SkillsSection from "@/components/SkillsSection";
 import ProjectsSection from "@/components/ProjectsSection";
-import ServicesSection from "@/components/ServicesSection";
-import ExperienceSection from "@/components/ExperienceSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-
-const Index = () => {
-  return (
-    <>
-      <ScrollProgress />
-      <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <EducationSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <ServicesSection />
-      <ExperienceSection />
-      <ContactSection />
-      <Footer />
-    </>
-  );
-};
-
+const Index = () => <><ScrollProgress /><Navbar /><main id="main"><HeroSection /><AboutSection /><ProjectsSection /><SkillsSection /><EducationSection /><ContactSection /></main><Footer /></>;
 export default Index;

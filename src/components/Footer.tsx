@@ -1,22 +1,5 @@
-import { Github, Linkedin, Twitter } from "lucide-react";
-
-const Footer = () => (
-  <footer className="border-t border-border py-10">
-    <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p className="font-mono-label text-muted-foreground">© 2025 Neha Khadgi. All rights reserved.</p>
-      <div className="flex items-center gap-3">
-        {[Github, Linkedin, Twitter].map((Icon, i) => (
-          <a
-            key={i}
-            href="#"
-            className="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground hover:text-accent hover:bg-accent/10 transition-all duration-300"
-          >
-            <Icon size={15} />
-          </a>
-        ))}
-      </div>
-    </div>
-  </footer>
-);
-
+import { ArrowUpRight, ArrowUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { profile } from "@/data/portfolio";
+const Footer = () => <footer className="border-t border-border py-8"><div className="page-container flex flex-wrap items-center justify-between gap-5"><p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Neha Khadgi</p><div className="flex items-center gap-6"><Button asChild variant="link" className="text-muted-foreground p-0"><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight /></a></Button><Button asChild variant="ghost" size="icon"><a href="#home" aria-label="Back to top" title="Back to top"><ArrowUp /></a></Button></div></div></footer>;
 export default Footer;
