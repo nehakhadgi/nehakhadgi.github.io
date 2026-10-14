@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { ArrowUpRight, Check, Github, Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
+import { ArrowUpRight, Check, Github, Linkedin, Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { profile } from "@/data/portfolio";
