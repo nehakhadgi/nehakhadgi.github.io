@@ -1,132 +1,39 @@
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
-import { X, ArrowUpRight } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ArrowUpRight, Github } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { categories, type Project, type ProjectCategory, projects } from "@/data/portfolio";
+import SectionReveal from "./SectionReveal";
 
-const projects = [
-  {
-    title: "Ranjana Script Recognition (YOLO)",
-    subtitle: "Major Project · 4th Year",
-    description: "Extended previous research to recognize both printed and handwritten Ranjana script characters using YOLO-based object detection. Improved recognition accuracy through advanced dataset engineering and model optimization.",
-    tags: ["YOLO", "Computer Vision", "Python", "Deep Learning"],
-    gradient: "var(--gradient-accent)",
-    number: "01",
-  },
-  {
-    title: "Ranjana Character Recognition",
-    subtitle: "Minor Project · 3rd Year",
-    description: "Developed a character recognition system for the Ranjana script. Created a synthetic dataset manually for training, focusing on object detection and dataset engineering fundamentals.",
-    tags: ["YOLO", "Dataset Engineering", "Python"],
-    gradient: "var(--gradient-sage)",
-    number: "02",
-  },
-  {
-    title: "Teleindex System",
-    subtitle: "Course Project",
-    description: "Built an indexing and search functionality system demonstrating efficient data retrieval and management principles.",
-    tags: ["Software Engineering", "Search"],
-    gradient: "var(--gradient-warm)",
-    number: "03",
-  },
-  {
-    title: "Hospital Management System",
-    subtitle: "Database Project",
-    description: "Database-driven system with CRUD operations showcasing understanding of software workflow, relational databases, and SQL usage.",
-    tags: ["SQL", "Database", "CRUD"],
-    gradient: "var(--gradient-accent)",
-    number: "04",
-  },
-];
+const ProjectVisual = ({ project, index }: { project: Project; index: number }) => (
+  <div className="project-visual" aria-hidden="true">
+    <div className="flex justify-between font-mono-label text-muted-foreground"><span>NK / {String(index + 1).padStart(2, "0")}</span><span>{project.category}</span></div>
+    <div className="flow-track">
+      {project.flow.map((step, stepIndex) => <div className="contents" key={step}><span className="flow-node">{step}</span>{stepIndex < 2 && <span className="flow-line" />}</div>)}
+    </div>
+  </div>
+);
 
 const ProjectsSection = () => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-  const [selected, setSelected] = useState<number | null>(null);
-
+  const [category, setCategory] = useState<ProjectCategory>("All projects");
+  const [selected, setSelected] = useState<Project | null>(null);
+  const visible = useMemo(() => category === "All projects" ? projects : projects.filter(project => project.category === category), [category]);
   return (
-    <section id="projects" ref={ref}>
-      <div className="divider-gradient" />
-      <div className="section-container">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <p className="section-label">Projects</p>
-          <h2 className="section-title">Case Studies & Research</h2>
-
-          <div className="grid md:grid-cols-2 gap-6 mt-12">
-            {projects.map((p, i) => (
-              <motion.div
-                key={p.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.1 * i, ease: [0.16, 1, 0.3, 1] }}
-                onClick={() => setSelected(i)}
-                className="card-glass rounded-2xl p-7 cursor-pointer group relative overflow-hidden"
-              >
-                {/* Number watermark */}
-                <span className="absolute top-4 right-6 font-display text-6xl font-black text-border/50 group-hover:text-accent/15 transition-colors duration-500">
-                  {p.number}
-                </span>
-
-                <div className="relative z-10">
-                  <span className="font-mono-label text-muted-foreground">{p.subtitle}</span>
-                  <h3 className="font-display text-xl font-bold mt-3 text-foreground flex items-center gap-2">
-                    {p.title}
-                    <ArrowUpRight size={18} className="text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500" />
-                  </h3>
-                  <div className="flex flex-wrap gap-2 mt-5">
-                    {p.tags.map((t) => (
-                      <span key={t} className="skill-chip text-[10px]">{t}</span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Modal */}
-        <AnimatePresence>
-          {selected !== null && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-6"
-              onClick={() => setSelected(null)}
-            >
-              <div className="absolute inset-0 bg-foreground/10 backdrop-blur-md" />
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 30 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 30 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                onClick={(e) => e.stopPropagation()}
-                className="relative bg-card rounded-3xl p-10 max-w-lg w-full"
-                style={{ boxShadow: 'var(--shadow-elevated)' }}
-              >
-                <button
-                  onClick={() => setSelected(null)}
-                  className="absolute top-5 right-5 w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-border transition-all"
-                >
-                  <X size={16} />
-                </button>
-                <span className="font-mono-label text-accent">{projects[selected].subtitle}</span>
-                <h3 className="font-display text-2xl md:text-3xl font-bold mt-3 text-foreground">{projects[selected].title}</h3>
-                <p className="text-muted-foreground font-body mt-5 leading-relaxed">{projects[selected].description}</p>
-                <div className="flex flex-wrap gap-2 mt-8">
-                  {projects[selected].tags.map((t) => (
-                    <span key={t} className="skill-chip">{t}</span>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+    <section id="projects" className="section-band">
+      <SectionReveal className="section-container">
+        <div className="section-heading md:flex md:items-end md:justify-between gap-8"><div><p className="section-label">02 / Selected work</p><h2 className="section-title mb-0">Projects built to answer<br />real questions.</h2></div><p className="text-muted-foreground max-w-sm text-sm mt-5 md:mt-0">A selection of machine learning, analytics, forecasting, NLP, and computer vision work.</p></div>
+        <div className="flex flex-wrap gap-2 mb-8" role="group" aria-label="Filter projects">{categories.map(item => <Button key={item} variant={category === item ? "default" : "outline"} size="sm" onClick={() => setCategory(item)} aria-pressed={category === item}>{item}</Button>)}</div>
+        <div className="grid md:grid-cols-2 gap-px bg-border border border-border">
+          {visible.map((project) => { const index = projects.indexOf(project); return <article key={project.title} className="project-card group">
+            <ProjectVisual project={project} index={index} />
+            <div className="pt-6"><p className="font-mono-label text-accent">{project.category}</p><h3 className="text-xl md:text-2xl font-semibold mt-3 leading-tight">{project.title}</h3><p className="text-sm text-muted-foreground mt-3 leading-relaxed">{project.description}</p><div className="flex flex-wrap gap-2 mt-5">{project.tags.map(tag => <span className="skill-chip" key={tag}>{tag}</span>)}</div><div className="flex items-center justify-between mt-7 pt-5 border-t border-border"><Button variant="link" className="p-0 text-muted-foreground" onClick={() => setSelected(project)}>View details <ArrowUpRight /></Button><Button asChild variant="ghost" size="icon"><a href={project.url === "https://github.com/nehakhadgi/support-signal-radar" ? "https://github.com/nehakhadgi" : project.url} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} on GitHub`} title="View on GitHub"><Github /></a></Button></div></div>
+          </article>; })}
+        </div>
+        <Dialog open={selected !== null} onOpenChange={open => { if (!open) setSelected(null); }}>
+          {selected && <DialogContent className="max-w-2xl"><DialogHeader><p className="font-mono-label text-accent mb-3">{selected.category}</p><DialogTitle className="text-2xl md:text-3xl leading-tight pr-8">{selected.title}</DialogTitle><DialogDescription className="text-base leading-relaxed pt-4">{selected.detail}</DialogDescription></DialogHeader><div className="flex flex-wrap gap-2">{selected.tags.map(tag => <span key={tag} className="skill-chip">{tag}</span>)}</div><Button asChild className="mt-3 w-fit"><a href={selected.url === "https://github.com/nehakhadgi/support-signal-radar" ? "https://github.com/nehakhadgi" : selected.url} target="_blank" rel="noopener noreferrer">View on GitHub <ArrowUpRight /></a></Button></DialogContent>}
+        </Dialog>
+      </SectionReveal>
     </section>
   );
 };
-
 export default ProjectsSection;
