@@ -43,7 +43,7 @@ export const projects: Project[] = [
     title: "Support Signal Radar", category: "Applied AI",
     description: "Finding recurring support themes beyond exact keyword matches.",
     detail: "Applied Sentence-Transformers embeddings and K-Means clustering to support tickets. Ranked topics using ticket volume and cluster cohesion, and compared semantic with keyword search.",
-    tags: ["NLP", "Embeddings", "K-Means"], url: repo("support-signal-radar"), flow: ["Support tickets", "Embeddings", "Topic clusters"],
+    tags: ["NLP", "Embeddings", "K-Means"], url: profile.github, flow: ["Support tickets", "Embeddings", "Topic clusters"],
   },
   {
     title: "Electricity Demand Forecasting", category: "Machine Learning",
