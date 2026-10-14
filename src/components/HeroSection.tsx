@@ -22,7 +22,7 @@ const HeroSection = () => (
         </div>
         <div className="hero-bottom flex flex-wrap items-center justify-between gap-5">
           <div className="flex flex-wrap gap-x-7 gap-y-2 font-mono-label text-muted-foreground"><span>Machine Learning</span><span>Data Science</span><span>Applied AI</span></div>
-          <Button asChild variant="link" className="p-0 text-muted-foreground"><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight /></a></Button>
+          <div className="flex flex-wrap items-center gap-x-7 gap-y-2 font-mono-label"><a className="text-muted-foreground transition-colors hover:text-foreground" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight /></a><a className="text-muted-foreground transition-colors hover:text-foreground" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight /></a></div>
         </div>
       </SectionReveal>
     </div>
