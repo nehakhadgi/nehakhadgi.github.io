@@ -1,6 +1,6 @@
 export const profile = {
   name: "Neha Khadgi",
-  email: "neha.khadgi55@gmail.com",
+  email: "nehakhadgi55@gmail.com",
   phone: "+977 9863026859",
   github: "https://github.com/nehakhadgi",
   linkedin: "https://www.linkedin.com/in/nehakhadgi/",
