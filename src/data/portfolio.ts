@@ -3,6 +3,7 @@ export const profile = {
   email: "neha.khadgi55@gmail.com",
   phone: "+977 9863026859",
   github: "https://github.com/nehakhadgi",
+  linkedin: "https://www.linkedin.com/in/nehakhadgi/",
   website: "https://nehakhadgi.com.np",
   location: "Kathmandu, Nepal",
 };
