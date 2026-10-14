@@ -1,207 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 220 15% 98%;
-    --foreground: 220 40% 12%;
-    --card: 0 0% 100%;
-    --card-foreground: 220 40% 12%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 40% 12%;
-    --primary: 220 40% 12%;
-    --primary-foreground: 220 15% 98%;
-    --secondary: 220 10% 94%;
-    --secondary-foreground: 220 40% 12%;
-    --muted: 220 10% 94%;
-    --muted-foreground: 220 10% 50%;
-    --accent: 255 25% 65%;
-    --accent-foreground: 0 0% 100%;
-    --accent-sage: 145 15% 60%;
-    --accent-sage-foreground: 145 30% 15%;
-    --accent-warm: 30 60% 65%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 220 10% 90%;
-    --input: 220 10% 90%;
-    --ring: 255 25% 65%;
-    --radius: 0.75rem;
-
-    --shadow-card: 0 0 0 1px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.05), 0 12px 24px rgba(0,0,0,0.05);
-    --shadow-hover: 0 0 0 1px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.08), 0 20px 40px rgba(0,0,0,0.08);
-    --shadow-elevated: 0 0 0 1px rgba(0,0,0,0.02), 0 8px 16px rgba(0,0,0,0.06), 0 32px 64px rgba(0,0,0,0.1);
-
-    --gradient-accent: linear-gradient(135deg, hsl(255 25% 65%), hsl(200 40% 60%));
-    --gradient-warm: linear-gradient(135deg, hsl(30 60% 65%), hsl(355 50% 65%));
-    --gradient-sage: linear-gradient(135deg, hsl(145 15% 60%), hsl(180 20% 55%));
-    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 225 16% 7%;
+    --foreground: 220 20% 94%;
+    --card: 225 14% 10%;
+    --card-foreground: 220 20% 94%;
+    --popover: 225 14% 10%;
+    --popover-foreground: 220 20% 94%;
+    --primary: 220 20% 94%;
+    --primary-foreground: 225 16% 7%;
+    --secondary: 225 11% 15%;
+    --secondary-foreground: 220 20% 94%;
+    --muted: 225 11% 15%;
+    --muted-foreground: 220 9% 62%;
+    --accent: 245 72% 70%;
+    --accent-foreground: 225 16% 7%;
+    --accent-sage: 158 42% 58%;
+    --destructive: 0 70% 62%;
+    --destructive-foreground: 220 20% 94%;
+    --border: 225 10% 20%;
+    --input: 225 10% 22%;
+    --ring: 245 72% 70%;
+    --radius: 0.35rem;
+    --sidebar-background: 225 16% 7%;
+    --sidebar-foreground: 220 20% 94%;
+    --sidebar-primary: 245 72% 70%;
+    --sidebar-primary-foreground: 225 16% 7%;
+    --sidebar-accent: 225 11% 15%;
+    --sidebar-accent-foreground: 220 20% 94%;
+    --sidebar-border: 225 10% 20%;
+    --sidebar-ring: 245 72% 70%;
   }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-    font-family: 'Instrument Sans', sans-serif;
-    line-height: 1.6;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Schibsted Grotesk', sans-serif;
-    letter-spacing: -0.04em;
-    line-height: 0.95;
-  }
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  body { @apply bg-background text-foreground; font-family: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; line-height: 1.6; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, h4, h5, h6 { font-family: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif; letter-spacing: 0; }
+  a, button, input, textarea { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background; }
+  ::selection { @apply bg-accent text-accent-foreground; }
 }
 
 @layer components {
-  .font-mono-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .text-display {
-    font-size: clamp(3rem, 10vw, 6rem);
-    font-weight: 900;
-    line-height: 0.9;
-  }
-
-  .card-surface {
-    background: hsl(var(--card));
-    box-shadow: var(--shadow-card);
-    border: 0.5px solid hsl(var(--border));
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .card-surface:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-hover);
-  }
-
-  .card-glass {
-    background: var(--gradient-glass);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid hsl(var(--border) / 0.5);
-    box-shadow: var(--shadow-card);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .card-glass:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-hover);
-  }
-
-  .gradient-text {
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .skill-chip {
-    @apply py-1.5 px-4 rounded-full;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border: 1px solid hsl(var(--border));
-    color: hsl(var(--muted-foreground));
-    background: hsl(var(--card));
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .skill-chip:hover {
-    border-color: hsl(var(--accent));
-    color: hsl(var(--accent));
-    background: hsl(var(--accent) / 0.08);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px hsl(var(--accent) / 0.15);
-  }
-
-  .section-container {
-    @apply max-w-5xl mx-auto px-6 py-28;
-  }
-
-  .btn-primary {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold;
-    background: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 14px;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px hsl(var(--primary) / 0.3);
-  }
-
-  .btn-outline {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold;
-    background: transparent;
-    color: hsl(var(--foreground));
-    border: 1.5px solid hsl(var(--border));
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 14px;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .btn-outline:hover {
-    border-color: hsl(var(--accent));
-    color: hsl(var(--accent));
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px hsl(var(--accent) / 0.1);
-  }
-
-  .section-label {
-    @apply font-mono-label mb-4 inline-block;
-    color: hsl(var(--accent));
-  }
-
-  .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold mb-6;
-    color: hsl(var(--foreground));
-    line-height: 1.05;
-  }
-
-  .divider-gradient {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
-  }
+  .page-container { @apply w-full max-w-6xl mx-auto px-5 sm:px-8; }
+  .section-container { @apply page-container py-20 md:py-28; }
+  .section-band { @apply border-t border-border; }
+  .section-heading { @apply mb-12 md:mb-16; }
+  .section-label { @apply font-mono-label text-accent mb-4; }
+  .section-title { @apply text-3xl sm:text-4xl md:text-5xl font-semibold leading-[1.08]; }
+  .font-mono-label { font-family: "JetBrains Mono", ui-monospace, monospace; @apply text-[10px] sm:text-[11px] uppercase tracking-[0.12em]; }
+  .hero-section { @apply min-h-[min(880px,100svh)] pt-28 md:pt-32 flex items-center border-b border-border; }
+  .hero-name { @apply text-sm md:text-base font-semibold mb-5; }
+  .hero-heading { @apply text-[clamp(2.75rem,7.6vw,6.6rem)] font-semibold leading-[0.98] max-w-5xl; }
+  .hero-bottom { @apply mt-14 md:mt-20 pt-6 border-t border-border; }
+  .skill-chip { @apply inline-flex items-center border border-border bg-secondary px-3 py-1.5 rounded-sm text-[11px] text-muted-foreground transition-colors hover:text-foreground hover:border-muted-foreground; }
+  .project-card { @apply bg-background p-5 sm:p-7 md:p-8 transition-colors hover:bg-card; }
+  .project-visual { @apply aspect-[16/8] bg-card border border-border p-4 flex flex-col justify-between overflow-hidden; background-image: linear-gradient(hsl(var(--border) / 0.35) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--border) / 0.35) 1px, transparent 1px); background-size: 32px 32px; }
+  .flow-track { @apply flex items-center justify-center w-full pb-2; }
+  .flow-node { @apply bg-background border border-border px-2.5 py-2 text-[9px] sm:text-[10px] text-center max-w-[8rem]; }
+  .flow-line { @apply h-px w-5 sm:w-10 bg-accent shrink-0; }
+  .contact-link { @apply flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors; }
+  .contact-link svg { @apply w-4 h-4 text-accent shrink-0; }
+  .form-label { @apply block text-xs text-muted-foreground; }
+  .form-label input, .form-label textarea { @apply w-full mt-2 bg-card border border-input rounded-sm px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground/60 transition-colors focus:border-accent; }
+  .skip-link { @apply fixed left-4 top-3 z-50 -translate-y-20 bg-primary text-primary-foreground px-4 py-2 text-sm focus:translate-y-0; }
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: hsl(var(--background));
-}
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--border));
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground));
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: hsl(var(--background)); }
+::-webkit-scrollbar-thumb { background: hsl(var(--border)); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
